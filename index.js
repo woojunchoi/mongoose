@@ -36,6 +36,36 @@ app.post('/api/genres', (req,res) => {
         else res.json(genre)
     })
 })
+
+app.put('/api/genres/:_id', (req,res) => {
+    let id = req.params._id
+    let genre = req.body;
+    Genre.updateGenres(id,genre,{},(err,genre) => {
+        if(err) throw err
+        else res.json(genre)
+    })
+})
+
+app.put('/api/genres/:_id', (req, res) => {
+	var id = req.params._id;
+	var genre = req.body;
+	Genre.updateGenre(id, genre, {}, (err, genre) => {
+		if(err){
+			throw err;
+		}
+		res.json(genre);
+	});
+});
+
+app.delete('/api/genres/:_id', (req, res) => {
+	var id = req.params._id;
+	Genre.removeGenre(id, (err, genre) => {
+		if(err){
+			throw err;
+		}
+		res.json(genre);
+	});
+});
 // books
 app.get('/api/books', (req,res) => {
     Book.getBooks(function(err,book) {
@@ -58,6 +88,27 @@ app.get('/api/books/:_id', (req,res) => {
         else res.json(book)
     })
 })
+
+app.put('/api/books/:_id', (req, res) => {
+	var id = req.params._id;
+	var book = req.body;
+	Book.updateBook(id, book, {}, (err, book) => {
+		if(err){
+			throw err;
+		}
+		res.json(book);
+	});
+});
+
+app.delete('/api/books/:_id', (req, res) => {
+	var id = req.params._id;
+	Book.removeBook(id, (err, book) => {
+		if(err){
+			throw err;
+		}
+		res.json(book);
+	});
+});
 
 app.listen(3000);
 console.log('running on port 3000')
