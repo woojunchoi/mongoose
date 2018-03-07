@@ -18,6 +18,7 @@ app.get('/', (req,res) => {
     res.send('hello world')
 })
 
+// genre
 app.get('/api/genres', (req,res) => {
     Genre.getGenres(function(err,genre) {
         if(err) {
@@ -28,7 +29,6 @@ app.get('/api/genres', (req,res) => {
         }
     })
 })
-
 app.post('/api/genres', (req,res) => {
     let genre = req.body
     Genre.addGenres(genre,(err,genre) => {
@@ -36,7 +36,7 @@ app.post('/api/genres', (req,res) => {
         else res.json(genre)
     })
 })
-
+// books
 app.get('/api/books', (req,res) => {
     Book.getBooks(function(err,book) {
         if(err) console.log(err)
@@ -44,11 +44,18 @@ app.get('/api/books', (req,res) => {
     })
 })
 
+app.post('/api/books', (req,res) => {
+    let book = req.body
+    Book.addBooks(book,(err,books)=>{
+        if(err) throw err
+        else res.json(books)
+    })
+})
+
 app.get('/api/books/:_id', (req,res) => {
     Book.getBooksById(req.params._id , (err,book) => {
         if(err) console.log(err)
         else res.json(book)
-    
     })
 })
 
